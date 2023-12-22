@@ -1,0 +1,23 @@
+<p>quiz works!</p>
+
+<mat-stepper [linear]="true" #stepper>
+  <mat-step *ngFor="let question of quiz.questions">
+    <h1>{{question.question}}</h1>
+    <div class="grid-container">
+      <button (click)="question.selectedOption = opt; checkIfEnded(opt)" [class.selected]="question.selectedOption=== opt"
+        *ngFor="let opt of question.options" class="grid-item" mat-button matStepperNext>
+        {{opt.name}}
+      </button>
+    </div>
+  </mat-step>
+  <mat-step >
+    <div *ngIf="this.result !== undefined">
+      <h1>End! You are:</h1>
+      <h2>{{this.result | json}}</h2>
+    </div>
+
+  </mat-step>
+  <button mat-button matStepperPrevious>Back</button>
+<button mat-button matStepperNext>Next</button>
+</mat-stepper>
+
